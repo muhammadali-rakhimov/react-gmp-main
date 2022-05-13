@@ -1,0 +1,16 @@
+.parent {
+  background-color: #232323;
+  color: #fff;
+}
+
+.dropdownList {
+  /* width: 130px; */
+  position: absolute;
+  margin-left: 2px;
+  background-color: #fff;
+  color: #000;
+  list-style: none;
+  list-style-position: inside;
+  font-family: "Montserrat", sans-serif;
+  border: 0;
+}

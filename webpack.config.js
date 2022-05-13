@@ -1,52 +1,59 @@
-const path = require('path')
-const webpack = require('webpack')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const webpack = require("webpack");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve('dist'),
-    filename: 'bundle.js',
+    path: path.resolve("dist"),
+    filename: "bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: "babel-loader",
       },
       {
         test: /\.html$/,
-        use: "html-loader"
+        use: "html-loader",
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|svg|gif)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: "file-loader",
             options: {
-              limit: 8192
-            }
-          }
+              limit: 8192,
+            },
+          },
         ],
-        type: "javascript/auto"
-      }
-    ]
+        type: "javascript/auto",
+      },
+    ],
+  },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"],
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "public")
+      directory: path.join(__dirname, "public"),
     },
     port: 3000,
-    open: true
+    devMiddleware: {
+      publicPath: "http://localhost:3000/",
+    },
+    open: true,
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: "./public/index.html"
-    })
-  ]
-}
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+  // plugins: [
+  //   new HTMLWebpackPlugin({
+  //     template: "./public/index.html"
+  //   })
+  // ],
+};
