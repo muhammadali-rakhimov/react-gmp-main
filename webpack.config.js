@@ -48,7 +48,7 @@ module.exports = {
     devMiddleware: {
       publicPath: "http://localhost:3000/",
     },
-    open: true,
+    open: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   // plugins: [
